@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js" integrity="sha512-7oYXeK0OxTFxndh0erL8FsjGvrl2VMDor6fVqzlLGfwOQQqTbYsGPv4ZZ15QHfSk80doyaM0ZJdvkyDcVO7KFA==" crossorigin="anonymous"></script>
+
+
+
+</head>
+<body ng-app="myApp">
+    <div ng-controller="myController">
+        <h2>{{ title }}</h2>
+    </div>
+     <div ng-controller="SecondController">
+        <p>{{ paragraph }}</p>
+    </div>
+   
+    <div ng-controller="loop">
+        <ul>
+            <li ng-repeat='index in array'>{{ index }}</li>
+        </ul>
+    </div>
+    
+    <div ng-controller="info">
+        <div class="container">
+            <table class="table table-striped">
+                <tr>
+                    <th>name</th>
+                    <th>age</th>
+                    <th>gender</th>
+                </tr>
+                <tr ng-repeat='user in users'>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.age }}</td>
+                    <td>{{ user.gender }}</td>
+                </tr>
+               
+            </table>
+        </div>    
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
