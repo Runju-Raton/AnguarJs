@@ -8,9 +8,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js" integrity="sha512-7oYXeK0OxTFxndh0erL8FsjGvrl2VMDor6fVqzlLGfwOQQqTbYsGPv4ZZ15QHfSk80doyaM0ZJdvkyDcVO7KFA==" crossorigin="anonymous"></script>
 
 </head>
-<body ng-app="">
+<body ng-app="" ng-init="array=['Rahim','Karim','Salam','Jabbar','Barkat']">
 
-   <h1>{{ 10+12 }}</h1> 
+    <ol>
+        <li ng-repeat="index in array">{{ index }}</li>
+    </ol>
     
 </body>
 </html>
