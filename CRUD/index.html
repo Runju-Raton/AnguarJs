@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular js CRUD</title>
+    <!-- bootstrap cdn-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- angular js cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js" integrity="sha512-7oYXeK0OxTFxndh0erL8FsjGvrl2VMDor6fVqzlLGfwOQQqTbYsGPv4ZZ15QHfSk80doyaM0ZJdvkyDcVO7KFA==" crossorigin="anonymous"></script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+    <div class="container">
+        <hr>
+        <button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal" data-target="#myModal">New User</button>
+        <h2>All users</h2>
+        <span class="clearfix"></span>
+        <hr>
+
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Index</th>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>              
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="user in users">
+                <th>{{ $index+1 }}</th>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td><button class="btn btn-info" data-toggle="modal" data-target="#myModalEdit" ng-click="selectUser(user)">Edit</button></td>
+                <td><button class="btn btn-danger" data-toggle="modal" data-target="#myModalDelete"  ng-click="selectUser(user)">Delete</button></td>
+              </tr>
+             
+            </tbody>
+          </table>
+    </div>
+
+  
+  <!-- Modal Registration -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">New User Registration</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="username">User name:</label>
+                  <input type="text" class="form-control" ng-model="newUser.username">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" ng-model="newUser.email">
+                  </div>
+                  <div class="form-group">
+                    <label for="username">Full name:</label>
+                    <input type="text" class="form-control" ng-model="newUser.fullName">
+                  </div>
+                <button type="submit" class="btn btn-primary" ng-click="saveUser()" data-dismiss="modal">Save</button>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Edit Modal -->
+  <div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Edit information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="username">User name:</label>
+                  <input type="text" class="form-control" ng-model="clickedUser.username">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" ng-model="clickedUser.email">
+                  </div>
+                  <div class="form-group">
+                    <label for="username">Full name:</label>
+                    <input type="text" class="form-control" ng-model="clickedUser.fullName">
+                  </div>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal">Save</button>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
+  <div class="modal fade" id="myModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Are you sure?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <strong style="color: red;">You are going to delete {{ clickedUser.fullName }}. All info...</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="deleteUser()">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- jquery -->
+  <script src="jquery-3.6.0.min.js"></script>
+  <!-- bootstrap cdn -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!-- custom js -->
+<script src="script.js"></script>
+</body>
+</html>
