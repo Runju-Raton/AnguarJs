@@ -1,6 +1,6 @@
 var myApp=angular.module("myApp",[]);
-myApp.controller("myController",function($scope){
-    console.log("Angular is going on......")
+myApp.controller("myController",function($scope,$http){
+    // $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
     $scope.newUser = {};
     $scope.clickedUser={};
@@ -14,15 +14,52 @@ myApp.controller("myController",function($scope){
 
     $scope.saveUser=function(){
         $scope.users.push($scope.newUser);
-        $scope.newUser = {};
-    };
+        
+        $scope.saveURL='index.php';
+        const userData={
+            username: $scope.newUser.username,
+            fullName: $scope.newUser.fullName,
+            email: $scope.newUser.email,
+        }
+        $scope.saveCurrentData(userData);
+        
 
-    $scope.selectUser=function(user){
-        $scope.clickedUser=user;
-    }
-    $scope.deleteUser=function(){
-        console.log('delete button e click marse')
-        $scope.users.splice($scope.users.indexOf($scope.clickedUser),1);
+    };
+    $scope.saveCurrentData=function(passData){
+       
+        
+     /*    $http({
+            method: "POST",
+            url: "index.php",
+            data:   passData
+            
+        }).then(function(response) {
+            $scope.data = response.data;
+            return "I am good";
+        }).catch(function(err) {
+            $scope.status = err.status;
+            
+        }); */
+
+       /*  $http.post('https://jsonplaceholder.typicode.com/posts.php',JSON.stringify(passData))
+        .then(function (response){
+            console.log(response.data);
+        }) */
+
+        $http({
+            url:'insert.php',
+            method:'POST',
+            data:passData,
+        }).then(function(response) {
+            console.log(response)
+        },function(error){
+            console.log('India')
+            console.log(error)
+        });
+        
         
     }
+    
+    
 });
+
