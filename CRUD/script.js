@@ -12,10 +12,10 @@ myApp.controller("myController",function($scope,$http){
         {username:"Pinky", fullName:"Pinky Mahmud", email:"Pinky@gmail.com"},
     ]
 
+  
+
     $scope.saveUser=function(){
         $scope.users.push($scope.newUser);
-        
-        $scope.saveURL='index.php';
         const userData={
             username: $scope.newUser.username,
             fullName: $scope.newUser.fullName,
@@ -51,15 +51,45 @@ myApp.controller("myController",function($scope,$http){
             method:'POST',
             data:passData,
         }).then(function(response) {
-            console.log(response)
+            var res=response
+            console.log(res.data.name1)
         },function(error){
-            console.log('India')
             console.log(error)
         });
-        
+        $scope.show();
         
     }
-    
+
+    // show data code goes here 
+    $scope.show=function(){
+        $http({
+            url:'show.php',
+            method:'POST',
+        }).then(function(response){
+            $scope.tableData=response.data;
+        },function(error){
+            console.log(error);
+        });
+        
+    }
+
+    $scope.selectUser=function(user){
+        $scope.clickedUser=user;
+    }
+    $scope.deleteUser=function(){
+        $http({
+            url:'delete.php',
+            method:'POST',
+            data:{
+                'id':$scope.clickedUser.id
+            }}).then(function(response){
+                $scope.msg=response.data;
+                console.log($scope.msg);
+            },function(error){
+                console.log(error);
+            });
+        $scope.show();
+    }
     
 });
 

@@ -15,31 +15,36 @@
     <div class="container">
         <hr>
         <button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal" data-target="#myModal">New User</button>
-        <h2>All users</h2>
+        <button class="btn btn-success btn-lg" ng-click="show()">show user</button>
         <span class="clearfix"></span>
         <hr>
-
-        <table class="table table-striped">
+    
+      <div>
+        
+      </div>
+       <table class="table table-striped">
             <thead>
               <tr>
                 <th>Index</th>
                 <th>UserName</th>
                 <th>Email</th>
+                <th>fullName</th>
                 <th>Edit</th>
                 <th>Delete</th>              
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="user in users">
-                <th>{{ $index+1 }}</th>
-                <td>{{ user.username }}</td>
+              <tr ng-repeat="user in tableData">
+                <th>{{ user.id }}</th>
+                <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
+                <td>{{ user.full_name }}</td>
                 <td><button class="btn btn-info" data-toggle="modal" data-target="#myModalEdit" ng-click="selectUser(user)">Edit</button></td>
                 <td><button class="btn btn-danger" data-toggle="modal" data-target="#myModalDelete"  ng-click="selectUser(user)">Delete</button></td>
               </tr>
              
             </tbody>
-          </table>
+          </table> 
     </div>
 
   
